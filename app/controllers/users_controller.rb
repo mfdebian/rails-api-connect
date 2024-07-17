@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   def index
-    users_from_api = FetchUsersService.call
+    users_from_api = UsersService.call
 
     users_from_api.each do |api_user|
       user = User.find_or_initialize_by(id: api_user['id'])
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user_data = FetchUsersService.create(user_params)
+    user_data = UsersService.create(user_params)
 
     @user = User.new(
       name: user_data['name'],
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
   end
   
   def update
-    updated_user_data = FetchUsersService.update(@user, user_params)
+    updated_user_data = UsersService.update(@user, user_params)
   
     respond_to do |format|
       if @user.update(
@@ -73,7 +73,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    response = FetchUsersService.destroy(@user.id)
+    response = UsersService.destroy(@user.id)
   
     if response[:status] == 200
       @user.destroy

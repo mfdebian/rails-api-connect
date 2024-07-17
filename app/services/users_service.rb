@@ -1,7 +1,7 @@
 require 'net/http'
 require 'json'
 
-class FetchUsersService
+class UsersService
   BASE_URL = 'https://jsonplaceholder.typicode.com/users'
 
   def self.call
