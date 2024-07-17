@@ -1,0 +1,43 @@
+<main>
+  <ul>
+    <li>
+      <strong>Full name:</strong>
+      <%= @user.name %>
+    </li>
+    <li>
+      <strong>Username:</strong>
+      <%= @user.username %>
+    </li>
+    <li>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </li>
+    <li>
+      <strong>Phone number:</strong>
+      <%= @user.phone %>
+    </li>
+    <% if @user.website.present? %>
+      <li>
+        <strong>Personal website:</strong>
+        <%= @user.website %>
+      </li>
+    <% end %>
+  </ul>
+
+  <div>
+    <%= link_to 'Edit user', edit_user_path(@user) %>
+  </div>
+  <br />
+  <div>
+    <%= link_to 'Delete user', user_path(@user),
+      data: {
+        turbo_method: :delete,
+        turbo_confirm: "Are you sure?"
+      }
+    %>
+  </div>
+  <br />
+  <div>
+    <%= link_to "Back to users", users_path %>
+  </div>
+</main>
